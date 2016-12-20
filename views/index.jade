@@ -1,0 +1,138 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title Make a Friend Club
+    //
+      Comila Template
+      http://www.templatemo.com/tm-490-comila
+    meta(http-equiv='X-UA-Compatible', content='IE=Edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='keywords', content='')
+    meta(name='description', content='')
+    // stylesheets css
+    link(rel='stylesheet', href='css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/font-awesome.min.css')
+    link(rel='stylesheet', href='css/index.css')
+  body
+    // home section
+    section#home
+      .container
+        .row
+          .col-md-offset-2.col-md-8.col-sm-12
+            .home-thumb
+              h1 Hello, it's Make a Friend Club
+              a.btn.btn-lg.btn-default(href='#login') Login
+              a.btn.btn-lg.btn-success(href='#register') Register
+    // about section
+    section#about
+      .container
+        .row
+          .col-md-6.col-sm-12
+            img.img-responsive.wow.fadeInUp(src='img/about.jpg', alt='About')
+          .col-md-6.col-sm-12
+            .about-thumb
+              .section-title
+                h2.intro No friends?
+                h2.intro So are thousands of people in your city.
+              div
+                p.intro
+                  | Wouldn't it be great to know if they are also looking for friends?
+                  span.intro Everyone
+                  |  registered here are looking for friends!
+                p.intro
+                  | This is not a dating website, register if you want to find friends to hang out with, watch movies, go for walks, hit bars, travel or whatever friends do these days!
+    // feature section
+    section#feature
+      .container
+        .row
+          svg.svgcolor-light(preserveaspectratio='none', viewbox='0 0 100 102', height='100', width='100%', version='1.1', xmlns='http://www.w3.org/2000/svg')
+            path(d='M0 0 L50 100 L100 0 Z')
+          .col-md-4.col-sm-6
+            .media.wow.fadeInUp
+              .media-object.media-left
+                i.icon.icon-laptop
+              #register.media-body
+                h2.media-heading.feature Make
+                p
+                  | Just enter your desired username, password and email. Verify your email, login and enter your profile info, it's fast and minimalistic!
+          .col-md-4.col-sm-6
+            .media.wow.fadeInUp
+              .media-object.media-left
+                i.icon.icon-refresh
+              .media-body
+                h2.media-heading.feature New
+                p
+                  | Enter your location and tags that uniquely describe you e.g. movies, music, video games,
+                  | Lady Gaga, architecture, walks, travel etc
+          .col-md-4.col-sm-8
+            .media.wow.fadeInUp
+              .media-object.media-left
+                i.icon.icon-chat
+              .media-body
+                h2.media-heading.feature Friends
+                p
+                  | Then browse through profiles of people who match your tags! By your city, state, country or anywhere in the world who share the same tags as you!
+          .row
+            .text-center.col-md-12.col-sm-12
+              .inline-form.register
+                form(method='post', action="/register")
+                  .col-md-4.col-sm-4
+                    input#username.form-control(type='text', name="username", placeholder='Username', required='')
+                  .col-md-4.col-sm-4
+                    input#email.form-control(type='email', name="email", placeholder='Email', required='')
+                  .col-md-4.col-sm-4
+                    input.form-control(name='password', type='password', placeholder='Password', required='')
+                  br
+                  input.btn.btn-default(type='submit', value='Register')
+                  if err
+                    #register_alerts #{errMsg}
+    // login section
+    section#login
+      .container
+        .row
+          .col-md-offset-2.col-md-8.col-sm-12
+            .contact-form
+              form#contact-form(action="/login" method="post")
+                .col-md-4.col-sm-4
+                  input#email.form-control(type='text', name="username" placeholder='username', required='')
+                .col-md-4.col-sm-4
+                  input.form-control(name='password', type='password', placeholder='Password', required='')
+                .col-md-4.col-sm-4
+                  input#submit.btn.btn.default.form-control.submit(type='submit', value='LOG IN', data-loading-text='signing you in....')
+        .row
+    // footer section
+    footer
+      .container
+        .row
+          svg.svgcolor-light(preserveaspectratio='none', viewbox='0 0 100 102', height='100', width='100%', version='1.1', xmlns='http://www.w3.org/2000/svg')
+            path(d='M0 0 L50 100 L100 0 Z')
+          .col-md-offset-3.col-md-6.col-sm-offset-3.col-sm-6.text-center
+            h2 Make a Friend Club
+            p
+              a(href='faq') FAQ
+              |  
+              a(href='about') About Us
+              |  
+              a(href='privacy') Privacy Policy
+              |  |
+              a(href='terms') Terms of Use
+              |  |
+              a(href='contact') Contact Us
+              br
+              |           Copyright © 2016 Make a Friend Club
+            ul.social-icon
+              li
+                a.fa.fa-facebook(href='#')
+              li
+                a.fa.fa-twitter(href='#')
+              li
+                a.fa.fa-behance(href='#')
+              li
+                a.fa.fa-dribbble(href='#')
+          .col-md-3.col-sm-3
+    // Back top
+    a.go-top(href='#back-top')
+      i.fa.fa-angle-up
+    // javscript js
+    script(src='js/bootstrap.min.js')
