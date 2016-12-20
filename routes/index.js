@@ -112,7 +112,7 @@ router.post('/register', parserFalse, (req, res) => {
         // setup e-mail data with unicode symbols
         var verifyLink = "http://www.makeafriend.club/verifyemail/" + random_string;
         var mailOptions = {
-            from: '"Make a Friend Club" <dexteriot@gmail.com>', // sender address
+            from: '"Make a Friend Club" <makeafriend@gmail.com>', // sender address
             to: email, // list of recipients
             subject: 'Please verify your email at MakeaFriend.Club', // Subject line
             html: html_email.verifyEmail(verifyLink)
