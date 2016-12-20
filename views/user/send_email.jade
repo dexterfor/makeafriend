@@ -1,0 +1,106 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Make a Friend Club
+    // Bootstrap Core CSS
+    link(href='../css/bootstrap.min.css', rel='stylesheet')
+    // Custom CSS
+    link(href='../css/send_email.css', rel='stylesheet')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+  body
+    // Navigation
+    nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+      .container
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') Make a Friend Club
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              if sender_username
+                a(href='../home/#{sender_username}/1/anywhere') Home
+              else
+                a(href='/login') Home
+            li
+              if sender_username
+                a(href='../settings') Settings
+              else
+                a(href='/login') Settings
+            li
+              a(href='/logout') Logout
+        // /.navbar-collapse
+      // /.container
+    // Page Content
+    .container
+      .row
+        .col-md-3
+        .col-md-6.left-orange-bar.profile
+          form.form-horizontal(method='post', action="/send_email")
+            .form-group
+              label.control-label.col-sm-2(for='from') From:
+              .col-sm-8
+                if sender_username
+                  input#from.form-control(type="text", name="sender", value="#{sender_username}")
+                else
+                  span#from.form-control Error: Sender not specified
+              span.col-sm-2
+            .form-group
+              label.control-label.col-sm-2(for='to') To:
+              .col-sm-8
+                if receiver_username
+                  input#to.form-control(type="text", name="receiver", value="#{receiver_username}")
+                else
+                  span#to.form-control Error: Receiver not specified
+              span.col-sm-2
+            .form-group
+              label.control-label.col-sm-2(for='subject') Subject:
+              .col-sm-8
+                input#subject.form-control(type='text', disabled="", placeholder='Sent from Make a Friend Club')
+              span.col-sm-2
+            .form-group
+              label.control-label.col-sm-2(for='message') Message:
+              .col-sm-8
+                textarea#message.form-control(rows='10', name="message_body", maxlength='1000')
+              span.col-sm-2
+            .form-group
+              .col-sm-offset-2.col-sm-4.col-sm-offset-6
+                input.btn.btn-primary.form-control(type='submit', value='SEND EMAIL', data-loading-text='sending email....')
+        .col-md-3
+      .row
+        .col-sm-offset-4.col-sm-4
+          if err
+            #send_email_alerts.alert.alert-danger #{errMsg}
+          if notVerified
+            #send_email_alerts.alert.alert-danger !{notVerifiedMsg}
+          if msg
+            #send_email_alerts.alert.alert-info #{msg}
+        .col-sm-4
+      // /.row
+      br
+      hr
+      // Footer
+      footer
+        .row.text-center
+          .col-lg-12
+            p Copyright © Make a Friend Club 2016
+        // /.row
+    // /.container
+    // jQuery
+    script(src='../js/jquery.js')
+    // Bootstrap Core JavaScript
+    script(src='../js/bootstrap.min.js')

@@ -1,0 +1,163 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Make a Friend Club
+    // Bootstrap Core CSS
+    link(href='../../../css/bootstrap.min.css', rel='stylesheet')
+    // Custom CSS
+    link(href='../../../css/home.css', rel='stylesheet')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+  body
+    // Navigation
+    nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+      .container
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') Make a Friend Club
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              if user
+                a(href='../../../home/#{user.username}/1/anywhere') Home
+              else if thisUser
+                a(href='../../../home/#{thisUser.username}/1/anywhere') Home
+              else
+                a(href='../../../index') Login
+            li
+              if user
+                a(href='../../../settings') Settings
+              else if thisUser
+                a(href='../../../settings') Settings
+              else
+                a(href='../../../../index') Login
+            li
+              a(href='../../../logout') Logout
+        // /.navbar-collapse
+      // /.container
+    // Page Content
+    .container
+      if err
+        .col-lg-12.text-center
+          | An error occurred. You may have not set tags or location. Try logging out and then logging in
+          p Error message: #{errMsg}
+      // Page Heading
+      .col-lg-12.text-center
+        if place == "anywhere"
+          a.btn.btn-default.active(href='../../../home/#{user.username}/1/anywhere') Anywhere
+          a.btn.btn-default(href='../../../home/#{user.username}/1/country') My Country
+          a.btn.btn-default(href='../../../home/#{user.username}/1/state') My State
+          a.btn.btn-default(href='../../../home/#{user.username}/1/city') My City        
+        else if place == "country"
+          a.btn.btn-default(href='../../../home/#{user.username}/1/anywhere') Anywhere
+          a.btn.btn-default.active(href='../../../home/#{user.username}/1/country') My Country
+          a.btn.btn-default(href='../../../home/#{user.username}/1/state') My State
+          a.btn.btn-default(href='../../../home/#{user.username}/1/city') My City
+        else if place == "state"
+          a.btn.btn-default(href='../../../home/#{user.username}/1/anywhere') Anywhere
+          a.btn.btn-default(href='../../../home/#{user.username}/1/country') My Country
+          a.btn.btn-default.active(href='../../../home/#{user.username}/1/state') My State
+          a.btn.btn-default(href='../../../home/#{user.username}/1/city') My City
+        else if place == "city"
+          a.btn.btn-default(href='../../../home/#{user.username}/1/anywhere') Anywhere
+          a.btn.btn-default(href='../../../home/#{user.username}/1/country') My Country
+          a.btn.btn-default(href='../../../home/#{user.username}/1/state') My State
+          a.btn.btn-default.active(href='../../../home/#{user.username}/1/city') My City        
+      // /.row
+      if matchingUsers
+        if matchingUsers.length == 0
+          .col-lg-12.text-center
+            | No matching users found. Try adding more tags or changing the existing ones
+        each usr, index in matchingUsers
+          - var today = new Date(); var year = today.getFullYear(); var age = ', ';
+          - if(usr.profile && usr.profile.yearOfBirth) { age += (year - parseInt(usr.profile.yearOfBirth, 10));}
+          - var rank = Math.round((parseInt(ranking[index])*100)/20);
+          - var gender; var aboutMe;
+          - if(usr.profile && usr.profile.gender){ gender = ", " + usr.profile.gender; } else { gender = ""; };
+          - if(usr.profile && usr.profile.aboutMe) { aboutMe = usr.profile.aboutMe.slice(0, 17) + "..."; }
+          .row.margin-top-20
+            .col-sm-3
+            .col-sm-6.left-orange-bar
+              if usr.img_ext
+                img.profile-pic(src='../../../usrimages/#{usr.username}.#{usr.img_ext}', alt='user image', height='100px', width='100px')
+              else
+                img.profile-pic(src='../../../usrimages/nophoto.jpg', alt='user image', height='100px', width='100px')
+              a.pull-right.btn.btn-info.match(href='../../../#{usr.username}/public') #{rank}% match
+              label.username #{usr.username}
+              |#{age}#{gender}
+              if usr.location
+                p #{usr.location.locality}, #{usr.location.administrative_area_level_1}, #{usr.location.country}
+              else
+                p Location N/A
+              if usr.profile && usr.profile.aboutMe
+                p #{aboutMe}
+            .col-sm-3
+      else
+        .col-lg-12.text-center
+          | An error occurred. We apologize for the inconvenience.
+      // Pagination
+      .row
+        .col-md-offset-3.col-md-6.col-md-offset-3.text-center
+          if prevPage
+            a.btn.btn-default(href="../../#{user.username}/#{prevPage}/#{place}") « Page #{prevPage}
+          if follPage
+            a.btn.btn-default(href="../../#{user.username}/#{follPage}/#{place}") Page #{follPage} »
+      .row
+        // UNCOMMENT ROW BELOW ONCE SEARCH IS READY
+        //.col-md-offset-3.col-md-6.col-md-offset-3.text-center.margin-top-20
+          select
+            option Page
+            option 01
+            option 02
+            option 03
+          select
+            option Age
+            option 18-27
+            option 28-37
+            option 38-47
+            option 48-57
+            option 58-67
+            option 68-99
+          select
+            option Gender
+            option M
+            option F
+            option N-B
+          select
+            option Sexuality
+            option Straight
+            option Lesbian
+            option Gay
+            option Bi
+      // /.row
+      // UNCOMMENT ROW BELOW ONCE SEARCH IS READY
+      //.row
+        .col-md-offset-3.col-md-6.col-md-offset-3.text-center.margin-top-20
+          a.btn.btn-default Search
+      // /.row
+      hr
+      // Footer
+      footer
+        .row.text-center
+          .col-lg-12
+            p Copyright © Make a Friend Club 2016
+        // /.row
+    // /.container
+    // jQuery
+    script(src='../../../js/jquery.js')
+    // Bootstrap Core JavaScript
+    script(src='../../../js/bootstrap.min.js')

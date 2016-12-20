@@ -1,0 +1,95 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Make a Friend Club
+    // Bootstrap Core CSS
+    link(href='../css/bootstrap.min.css', rel='stylesheet')
+    // Custom CSS
+    link(href='../css/tags.css', rel='stylesheet')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+  body
+    // Navigation
+    nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+      .container
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') Make a Friend Club
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              if user
+                a(href='../home/#{user.username}/1/anywhere') Home
+              else
+                a(href='/index') Home
+            li.active
+              if user
+                a(href='../settings') Settings
+              else
+                a(href='/index') Settings
+            li
+              a(href='/logout') Logout
+        // /.navbar-collapse
+      // /.container
+    // Page Content
+    .container
+      // Page Heading
+      if err
+        .col-lg-12.text-center
+          #error_messages.alert.alert-warning #{errMsg}
+      .col-lg-12.text-center
+        a.btn.btn-default(href='../../settings') Settings
+        a.btn.btn-default(href='../../profile') Profile
+        a.btn.btn-default.active(href='../../tags') Tags
+      .row
+        .col-md-3
+        .col-md-6.left-orange-bar.profile
+          ol#user_tags
+            if userTags
+              each value, index in userTags
+                li
+                  input(class="user_tag form-control", type="text", value="#{value}", maxlength="30")
+              -var k = userTags.length;
+                while k < 20
+                  li
+                    input(class="user_tag form-control", name="#{k++}", type="text", maxlength="30")
+            else
+              -var n = 0;
+              while n < 20
+                li
+                  input(class="user_tag form-control", name="#{n++}", maxlength="30")
+        .col-md-3
+      .row
+        .col-md-offset-3.col-md-6.col-md-offset-3.text-center
+          a#save_tags.btn.btn-default Save Tags
+          #tags_alerts
+      // /.row
+      br
+      hr
+      // Footer
+      footer
+        .row.text-center
+          .col-lg-12
+            p Copyright © Make a Friend Club 2016
+        // /.row
+    // /.container
+    // jQuery
+    script(src='../js/jquery.js')
+    // Bootstrap Core JavaScript
+    script(src='../js/bootstrap.min.js')
+    // Custom JS
+    script(src='../js/tags.js')

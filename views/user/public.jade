@@ -1,0 +1,151 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Make a Friend Club
+    // Bootstrap Core CSS
+    link(href='../css/bootstrap.min.css', rel='stylesheet')
+    // Custom CSS
+    link(href='../css/profile.css', rel='stylesheet')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+  body
+    // Navigation
+    nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+      .container
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') Make a Friend Club
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              if user
+                a(href='../home/#{user.username}/1/anywhere') Home
+              else
+                a(href='/login') Home
+            li
+              if user
+                a(href='../settings') Settings
+              else
+                a(href='/login') Settings
+            li
+              a(href='/logout') Logout
+        // /.navbar-collapse
+      // /.container
+    // Page Content
+    .container
+      // Page Heading
+      .col-lg-12.text-center
+      .row
+        .col-md-3
+        .col-md-6.left-orange-bar.profile
+          form.form-horizontal
+            .img-wrapper
+              if user_public.img_ext
+                img.profile-img(src="/usrimages/#{user_public.username}.#{user_public.img_ext}", alt="User Image")
+              else
+                img.profile-img(src="/usrimages/nophoto.jpg", alt="User Image")
+            if user_public
+              label(for='username') Username: #{user_public.username}
+            else
+              label(for='username') Username: Error occurred!
+            .form-group
+              label.control-label.col-sm-4(for='firstName') First Name:
+              .col-sm-8
+                if user_public.profile && user_public.profile.firstName
+                  input#firstName.form-control(type='text', value="#{user_public.profile.firstName}", disabled)
+                else
+                  input#firstName.form-control(type='text', value='First Name Not Set', disabled)
+            .form-group
+              label.control-label.col-sm-4(for='lastName') Last Name:
+              .col-sm-8
+                if user_public.profile && user_public.profile.lastName
+                  input#lastName.form-control(type='text', value="#{user_public.profile.lastName}")
+                else
+                  input#lastName.form-control(type='text', value='Last Name Not Set', disabled)
+            .form-group
+              label.control-label.col-sm-4(for='yearOfBirth')
+                | Year of Birth:
+              .col-sm-8
+                if user_public.profile && user_public.profile.yearOfBirth
+                  input#yearOfBirth.form-control(type='text', value="#{user_public.profile.yearOfBirth}", disabled)
+                else
+                  input#yearOfBirth.form-control(type='text', value='Year of Birth', disabled)
+            .form-group
+              label.control-label.col-sm-4(for='gender') Gender:
+              .col-sm-8
+                if user_public.profile && user_public.profile.gender
+                  input#gender.form-control(type='text', value="#{user_public.profile.gender}", disabled)
+                else
+                  input#gender.form-control(type='text', value="Gender Not Set", disabled)
+            .form-group
+              label.control-label.col-sm-4(for='attracted') Attracted to:
+              .col-sm-8
+                if user_public.profile && user_public.profile.attraction
+                  input#attraction.form-control(type='text', value="#{user_public.profile.attraction}", disabled)
+                else
+                  input#attraction.form-control(type='text', value="Attraction Not Set", disabled)
+            .form-group
+              label.control-label.col-sm-4(for='aboutMe') About Me:
+              .col-sm-8
+                if user_public.profile && user_public.profile.aboutMe
+                  textarea#aboutMe(rows='6', cols='37', maxlength='1000', class="form-control", disabled) #{user_public.profile.aboutMe}
+                else
+                  textarea#aboutMe(rows='6', cols='37', maxlength='1000', class="form-control", disabled) About Me Not Set
+            .form-group
+              label.control-label.col-sm-4(for='location')
+                | Location:
+              .col-sm-8
+                if user_location
+                  input.form-control(type='text', value="#{user_location}", disabled)
+                else
+                  input.form-control(type='text', value="Location Not Set", disabled)
+            .form-group
+              label.control-label.col-sm-4(for='tags')
+                | Tags:
+              .col-sm-8
+                if user_public.tags
+                  if user_public.tags.length == 0
+                    input.form-control(type='text', value="Tags not set")
+                  else
+                    -var tags_str = user_public.tags.join(', ');
+                    textarea#tags(rows='6', cols='37', class="form-control", disabled) #{tags_str}
+                else
+                  input.form-control(type='text', value="Tags not set")
+            .form-group
+              label.control-label.col-sm-4(for='sendEmail') Contact this user:
+              .col-sm-8
+                a#sendEmail.btn.btn-primary(href="/email_form/#{user_public.username}") Send Email
+            .col-sm-offset-4.col-sm-8
+              if err
+                #public_alerts.alert.alert-danger #{errMsg}
+              else if msg
+                #public_alerts.alert.alert-info #{msg}
+        .col-md-3
+      // /.row
+      br
+      hr
+      // Footer
+      footer
+        .row.text-center
+          .col-lg-12
+            p Copyright © Make a Friend Club 2016
+        // /.row
+    // /.container
+    // jQuery
+    script(src='../js/jquery.js')
+    // Bootstrap Core JavaScript
+    script(src='../js/bootstrap.min.js')
