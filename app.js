@@ -48,7 +48,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(session({
-    secret: 'g0Veg@nCh0o5eL1fe',
+    secret: 'goVeganChooseLife',
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({
