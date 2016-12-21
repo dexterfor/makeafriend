@@ -1,0 +1,103 @@
+
+body {
+    padding-top: 70px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+@media (min-width: 768px) {
+    .navbar .navbar-nav {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+        margin-right: 15%;
+    }
+
+    .navbar .navbar-collapse {
+        text-align: center;
+    }
+}
+
+/*-------- Navbar start ----------*/
+
+.navbar-default{
+  background-color: #ff4000;/*#ff4000 reddish *//*#ff751a /*orange new*/ /*#336699 azure blue*/ /*#003366; /*navy*/
+  border-color: #f1c11a;/*#FF6600 orange*/
+}
+
+.navbar-default .navbar-nav > .active > a {
+  background-color: #cc3300;/*#FF6600 orange*/
+  color: #FFF;
+}
+
+.navbar-default .navbar-nav > li > a, .navbar > .container .navbar-brand {
+  color: #FFF;
+}
+
+.navbar-default .navbar-nav > li > a:visited{
+  background-color: #ff4000;
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #fff;
+  background-color: #ff9f80;
+}
+
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:visited{
+  background-color: #cc3300;
+  color: #FFF;
+}
+
+.navbar-default .navbar-toggle .icon-bar{
+  background-color: #FFF;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
+  background-color: #ff9f80;
+}
+
+/*----------- Navbar end ------------*/
+
+.col-md-6.left-orange-bar{
+  /*width: 15%;
+  border-left-style: solid;*/
+  border-left: 1px solid #FF6600;
+}
+
+.col-md-3.right-col-md-3{
+  width: 35%;
+}
+
+.col-lg-12.text-center{
+  margin-bottom: 30px;
+}
+
+.col-lg-12.page{
+  margin-top: 15px;  
+  margin-bottom: 15px;
+}
+
+ol { 
+    -moz-column-count: 2;
+    -moz-column-gap: 2px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 2px;
+    column-count: 2;
+    column-gap: 2px;
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.btn.btn-primary{
+  background-color: #ff4000;
+  border-color: #ff4000;
+}
+
+.btn.btn-primary:hover{
+  background-color: #cc3300;
+  border-color: #cc3300;
+}
