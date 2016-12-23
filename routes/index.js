@@ -156,7 +156,7 @@ router.post('/login',
 */
 
 /*
- * 
+ * Login. Verification. 
  */
 router.post('/login', parserFalse, (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
@@ -179,6 +179,9 @@ router.post('/login', parserFalse, (req, res, next) => {
   })(req, res, next);
 });
 
+/*
+ * Logout
+ */
 router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
